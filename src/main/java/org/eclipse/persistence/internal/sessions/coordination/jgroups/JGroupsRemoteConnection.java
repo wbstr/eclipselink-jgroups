@@ -141,7 +141,8 @@ public class JGroupsRemoteConnection extends BroadcastRemoteConnection {
      * Indicates whether all the resources used by connection are freed after close method returns.
      */
     protected boolean areAllResourcesFreedOnClose() {
-        return !isLocal();
+        // to close channel properly
+        return true;
     }
 
     /**
@@ -181,4 +182,5 @@ public class JGroupsRemoteConnection extends BroadcastRemoteConnection {
     protected boolean shouldCheckServiceId() {
         return false;
     }
+
 }
