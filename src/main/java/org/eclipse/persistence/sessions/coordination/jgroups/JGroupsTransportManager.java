@@ -62,7 +62,11 @@ public class JGroupsTransportManager extends BroadcastTransportManager {
             channel.setDiscardOwnMessages(true);
             return new JGroupsRemoteConnection(this.rcm, channel, isLocalConnectionBeingCreated);
         } catch (Exception ex) {
-            throw RemoteCommandManagerException.errorCreatingJGroupsConnection(this.configFile, ex);
+            // modified exception creation to compile with eclipselink 2.5.x
+            // 2014.08.20 Kimmel Tamás
+            RemoteCommandManagerException e = new RemoteCommandManagerException("Error during creating jGroups connection!");
+            e.setInternalException(ex);
+            throw e;
         }
     }
 
